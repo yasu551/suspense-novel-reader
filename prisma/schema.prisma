@@ -12,3 +12,66 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// 作品
+model Work {
+  id                  String   @id @default(cuid())
+  title               String
+  author              String
+  publicationYear     Int?
+  isPublicDomain      Boolean  @default(true)
+  language            String   @default("en")
+  genre               String[]
+  tags                String[]
+  wordCount           Int?
+  difficulty          String? // "easy" | "normal" | "hard"
+  coverUrl            String?
+  sourceUrl           String   @unique
+  sourceId            String
+  license             String?
+  popularityScore     Float    @default(0)
+  translationStatus   String   @default("pending") // "pending" | "in_progress" | "completed" | "failed"
+  translationProgress Int      @default(0) // 翻訳済み段落数
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  chapters Chapter[]
+
+  @@index([translationStatus])
+  @@index([language])
+  @@index([difficulty])
+}
+
+// 章
+model Chapter {
+  id            String   @id @default(cuid())
+  workId        String
+  chapterNumber Int
+  title         String?
+  order         Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  work       Work        @relation(fields: [workId], references: [id], onDelete: Cascade)
+  paragraphs Paragraph[]
+
+  @@unique([workId, chapterNumber])
+  @@index([workId, order])
+}
+
+// 段落
+model Paragraph {
+  id                String   @id // "work-{workId}/chapter-{index}/paragraph-{index}"
+  chapterId         String
+  originalText      String   @db.Text
+  translationNormal String?  @db.Text
+  translationEasy   String?  @db.Text
+  order             Int
+  glossaryTags      String[]
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  @@index([chapterId, order])
+}

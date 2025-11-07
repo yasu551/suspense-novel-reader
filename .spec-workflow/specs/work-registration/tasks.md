@@ -10,7 +10,7 @@
   - _Requirements: 非機能要件 - コードアーキテクチャ_
   - _Prompt: spec work-registrationのタスク実装を開始します。まず spec-workflow-guide を実行してワークフローガイドを取得してから実装を進めてください。\n\nRole: DevOps エンジニア / データベーススペシャリスト\n\nTask: Prismaをプロジェクトに追加し、PostgreSQLデータベース接続を設定してください（要件: 非機能要件 - コードアーキテクチャ）。以下の手順を実行してください：\n1. `npm install prisma @prisma/client` でPrismaをインストール\n2. `npx prisma init` でPrismaプロジェクトを初期化\n3. `.env` ファイルに `DATABASE_URL` を設定（例: `postgresql://user:password@localhost:5432/suspense_novel_reader`）\n4. `prisma/schema.prisma` のdatasource設定を確認\n\nRestrictions:\n- 既存のデータベースがない場合はローカルPostgreSQLまたはVercel Postgresを使用\n- 環境変数は `.env` ファイルで管理（`.env.example` も作成）\n- Prisma Clientの型生成を有効化\n\nSuccess:\n- Prismaが正常にインストールされている\n- データベース接続が確立できる\n- `prisma/schema.prisma` が存在し、基本設定が完了している\n\n実装完了後、tasks.mdでこのタスクを [-] から [x] に更新し、log-implementation ツールで実装詳細を記録してください。_
 
-- [ ] 1.2 Prismaスキーマの定義（Work、Chapter、Paragraphモデル）
+- [x] 1.2 Prismaスキーマの定義（Work、Chapter、Paragraphモデル）
   - ファイル: `prisma/schema.prisma`（修正）
   - Work、Chapter、Paragraphモデルをスキーマに定義
   - 目的: 作品・章・段落のデータ構造を定義

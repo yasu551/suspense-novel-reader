@@ -1,6 +1,59 @@
 {
   "entries": [
     {
+      "taskId": "1.2",
+      "timestamp": "2025-11-07T02:59:04.120Z",
+      "summary": "Prismaスキーマに Work、Chapter、Paragraph モデルを定義しました。design.mdの仕様に従い、各モデルにフィールド、リレーション、インデックス、カスケード削除を設定しました。dotenvパッケージをインストールし、prisma.config.tsに環境変数読み込みを追加しました。",
+      "filesModified": [
+        "prisma/schema.prisma",
+        "prisma.config.ts",
+        "package.json"
+      ],
+      "filesCreated": [],
+      "statistics": {
+        "linesAdded": 68,
+        "linesRemoved": 2,
+        "filesChanged": 3
+      },
+      "artifacts": {
+        "classes": [
+          {
+            "name": "Work",
+            "purpose": "作品モデル - 作品の基本情報、翻訳状況、メタデータを管理",
+            "location": "prisma/schema.prisma",
+            "methods": [
+              "フィールド: id, title, author, publicationYear, language, genre, difficulty, translationStatus等",
+              "リレーション: chapters (1対多)"
+            ],
+            "isExported": true
+          },
+          {
+            "name": "Chapter",
+            "purpose": "章モデル - 作品の章情報を管理",
+            "location": "prisma/schema.prisma",
+            "methods": [
+              "フィールド: id, workId, chapterNumber, title, order",
+              "リレーション: work (多対1), paragraphs (1対多)",
+              "ユニーク制約: [workId, chapterNumber]"
+            ],
+            "isExported": true
+          },
+          {
+            "name": "Paragraph",
+            "purpose": "段落モデル - 原文と翻訳文を管理",
+            "location": "prisma/schema.prisma",
+            "methods": [
+              "フィールド: id (カスタムID), chapterId, originalText, translationNormal, translationEasy",
+              "リレーション: chapter (多対1)",
+              "インデックス: [chapterId, order]"
+            ],
+            "isExported": true
+          }
+        ]
+      },
+      "id": "64d7b5cf-3d1b-4aba-abf4-fa1c8d775d57"
+    },
+    {
       "taskId": "1.1",
       "timestamp": "2025-11-07T02:47:00.220Z",
       "summary": "Prismaをプロジェクトに追加し、PostgreSQLデータベース接続を設定しました。npm install、npx prisma init を実行し、.env および .env.example ファイルを作成してDATABASE_URLを設定しました。",
@@ -32,5 +85,5 @@
       "id": "94beaf8e-2185-4e4b-94ae-6630a3384632"
     }
   ],
-  "lastUpdated": "2025-11-07T02:47:00.221Z"
+  "lastUpdated": "2025-11-07T02:59:04.120Z"
 }
