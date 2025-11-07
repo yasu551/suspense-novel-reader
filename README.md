@@ -1,6 +1,13 @@
-# AI SDK, Next.js, and OpenAI Chat Example
+# Suspense Novel Reader
 
-This example shows how to use the [AI SDK](https://ai-sdk.dev/docs) with [Next.js](https://nextjs.org/) and [OpenAI](https://openai.com) to create a ChatGPT-like AI-powered streaming chat bot.
+英語原文の小説（特にパブリックドメインの古典）を日本語で"やさしく"読めるようにし、読書中の疑問をAIに即座に質問できるWebアプリケーション。
+
+## 機能
+
+- **作品登録**: Project GutenbergからURLで作品を自動インポート
+- **自動翻訳**: 通常訳とやさしい訳の両方を自動生成
+- **読書モード**: 原文/日本語/並列表示の切り替え
+- **AIチャット**: 選択したテキストについてAIに質問
 
 ## Deploy your own
 
@@ -24,14 +31,71 @@ yarn create next-app --example https://github.com/vercel/ai/tree/main/examples/n
 pnpm create next-app --example https://github.com/vercel/ai/tree/main/examples/next-openai next-openai-app
 ```
 
-To run the example locally you need to:
+## セットアップ手順
 
-1. Sign up at [OpenAI's Developer Platform](https://platform.openai.com/signup).
-2. Go to [OpenAI's dashboard](https://platform.openai.com/account/api-keys) and create an API KEY.
-3. If you choose to use external files for attachments, then create a [Vercel Blob Store](https://vercel.com/docs/storage/vercel-blob).
-4. Set the required environment variable as the token value as shown [the example env file](./.env.local.example) but in a new file called `.env.local`
-5. `pnpm install` to install the required dependencies.
-6. `pnpm dev` to launch the development server.
+### 1. 依存関係のインストール
+
+```bash
+npm install
+```
+
+### 2. 環境変数の設定
+
+`.env.example` を参考に `.env` ファイルを作成します：
+
+```bash
+cp .env.example .env
+```
+
+必要な環境変数：
+
+- `DATABASE_URL`: PostgreSQLデータベースの接続文字列
+- `OPENAI_API_KEY`: OpenAI APIキー
+
+### 3. データベースのセットアップ
+
+#### ローカルPostgreSQLを使用する場合
+
+1. PostgreSQLをインストール（未インストールの場合）
+2. データベースを作成：
+   ```bash
+   createdb suspense_novel_reader
+   ```
+3. `.env` ファイルのDATABASE_URLを更新：
+   ```
+   DATABASE_URL="postgresql://user:password@localhost:5432/suspense_novel_reader"
+   ```
+
+#### Vercel Postgresを使用する場合
+
+1. [Vercel](https://vercel.com)でプロジェクトを作成
+2. Storage → Postgres → Create Database
+3. 接続文字列をコピーして `.env` ファイルに設定
+
+### 4. Prismaマイグレーションの実行
+
+データベースにテーブルを作成します：
+
+```bash
+npx prisma migrate dev
+```
+
+Prisma Clientが自動的に生成されます。
+
+### 5. 開発サーバーの起動
+
+```bash
+npm run dev
+```
+
+ブラウザで http://localhost:3000 を開きます。
+
+## Prismaコマンド
+
+- **マイグレーション実行**: `npx prisma migrate dev`
+- **Prisma Studio起動**: `npx prisma studio`
+- **Prisma Client生成**: `npx prisma generate`
+- **スキーマフォーマット**: `npx prisma format`
 
 ## Learn More
 

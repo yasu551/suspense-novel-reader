@@ -26,7 +26,7 @@
   - _Requirements: 要件2（自動翻訳ジョブ）、将来的な機能_
   - _Prompt: spec work-registrationのタスク実装を開始します。まず spec-workflow-guide を実行してワークフローガイドを取得してから実装を進めてください。\n\nRole: データベースアーキテクト\n\nTask: Prismaスキーマに TranslationJob、GlossaryTerm、UserProfile、ReadingProgress、ChatLog モデルを定義してください（要件2: 自動翻訳ジョブ、将来的な機能）。design.md のデータモデルセクションを参照してください。\n\n1. **TranslationJob モデル**:\n   - id, workId, status, translationType\n   - totalCount, completedCount, errorLog\n   - startedAt, completedAt, createdAt, updatedAt\n   - リレーション: work (多対1)\n\n2. **GlossaryTerm モデル**（将来的な用語辞書機能用）\n3. **UserProfile モデル**（将来的な認証機能用）\n4. **ReadingProgress モデル**（将来的な読書進捗機能用）\n5. **ChatLog モデル**（将来的なAIチャット機能用）\n\nRestrictions:\n- design.md のスキーマ定義に厳密に従う\n- インデックスを適切に設定\n- カスケード削除を設定\n\nSuccess:\n- すべてのモデルが正しく定義されている\n- `npx prisma format` でエラーが出ない\n\n実装完了後、tasks.mdでこのタスクを [-] から [x] に更新し、log-implementation ツールで実装詳細を記録してください。_
 
-- [ ] 1.4 マイグレーションの実行とPrisma Clientの生成
+- [x] 1.4 マイグレーションの実行とPrisma Clientの生成
   - ファイル: `prisma/migrations/`（新規作成）
   - マイグレーションを実行し、データベースにテーブルを作成
   - 目的: データベーススキーマの適用とクライアントコード生成
@@ -36,7 +36,7 @@
 
 ## フェーズ2: 型定義とユーティリティ
 
-- [ ] 2.1 作品関連の型定義
+- [x] 2.1 作品関連の型定義
   - ファイル: `lib/types/work.ts`（新規作成）
   - ScrapedWork、ParsedWork、WorkMetadata、ValidationResult等の型を定義
   - 目的: スクレイパー/パーサーで使用する型の定義
