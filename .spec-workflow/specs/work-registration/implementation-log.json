@@ -1,6 +1,71 @@
 {
   "entries": [
     {
+      "taskId": "2.3",
+      "timestamp": "2025-11-07T03:32:13.090Z",
+      "summary": "ID生成ユーティリティを実装（段落ID生成、パース、バリデーション、プレフィックス生成）",
+      "filesModified": [],
+      "filesCreated": [
+        "lib/scraper/id-generator.ts"
+      ],
+      "statistics": {
+        "linesAdded": 209,
+        "linesRemoved": 0,
+        "filesChanged": 1
+      },
+      "artifacts": {
+        "functions": [
+          {
+            "name": "generateParagraphId",
+            "purpose": "段落IDを生成（work-{workId}/chapter-{chapterIndex}/paragraph-{paragraphIndex}形式）",
+            "location": "lib/scraper/id-generator.ts:19",
+            "signature": "(workId: string, chapterIndex: number, paragraphIndex: number) => string",
+            "isExported": true
+          },
+          {
+            "name": "parseParagraphId",
+            "purpose": "段落IDをパースしてworkId、chapterIndex、paragraphIndexを抽出",
+            "location": "lib/scraper/id-generator.ts:49",
+            "signature": "(paragraphId: string) => { workId: string; chapterIndex: number; paragraphIndex: number; } | null",
+            "isExported": true
+          },
+          {
+            "name": "generateChapterPrefix",
+            "purpose": "特定の章に属する段落をフィルタリングする際に使用する章IDプレフィックスを生成",
+            "location": "lib/scraper/id-generator.ts:91",
+            "signature": "(workId: string, chapterIndex: number) => string",
+            "isExported": true
+          },
+          {
+            "name": "generateWorkPrefix",
+            "purpose": "特定の作品に属する段落をフィルタリングする際に使用する作品IDプレフィックスを生成",
+            "location": "lib/scraper/id-generator.ts:133",
+            "signature": "(workId: string) => string",
+            "isExported": true
+          },
+          {
+            "name": "isValidParagraphId",
+            "purpose": "段落IDが有効な形式かどうかをチェック",
+            "location": "lib/scraper/id-generator.ts:159",
+            "signature": "(paragraphId: string) => boolean",
+            "isExported": true
+          },
+          {
+            "name": "generateParagraphIdBatch",
+            "purpose": "複数の段落IDを一括生成",
+            "location": "lib/scraper/id-generator.ts:184",
+            "signature": "(workId: string, chapterIndex: number, paragraphCount: number) => string[]",
+            "isExported": true
+          }
+        ],
+        "classes": [],
+        "apiEndpoints": [],
+        "components": [],
+        "integrations": []
+      },
+      "id": "ebab2770-a6b3-45eb-bbf6-f5dffcba4649"
+    },
+    {
       "taskId": "2.2",
       "timestamp": "2025-11-07T03:26:09.933Z",
       "summary": "URL検証ユーティリティを実装（Project Gutenberg URL検証、SSRF対策、URL正規化）",
@@ -289,5 +354,5 @@
       "id": "94beaf8e-2185-4e4b-94ae-6630a3384632"
     }
   ],
-  "lastUpdated": "2025-11-07T03:26:09.935Z"
+  "lastUpdated": "2025-11-07T03:32:13.091Z"
 }

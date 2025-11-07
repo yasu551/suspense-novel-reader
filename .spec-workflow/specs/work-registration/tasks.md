@@ -52,7 +52,7 @@
   - _Requirements: 要件3（URL検証とエラーハンドリング）_
   - _Prompt: spec work-registrationのタスク実装を開始します。まず spec-workflow-guide を実行してワークフローガイドを取得してから実装を進めてください。\n\nRole: セキュリティエンジニア / バックエンド開発者\n\nTask: URL検証ユーティリティを実装してください（要件3: URL検証とエラーハンドリング）。以下の機能を実装してください：\n\n1. **validateGutenbergUrl(url: string): ValidationResult**\n   - Project Gutenberg URLの形式を検証（正規表現: `https://www.gutenberg.org/cache/epub/\\d+/pg\\d+-images.html`）\n   - プライベートIPアドレスへのアクセスを拒否（127.0.0.1、192.168.x.x、10.x.x.x、172.16-31.x.x）\n   - URLを正規化（例: http → https）\n   - エラーメッセージを返す\n\n実装例:\n```typescript\nexport function validateGutenbergUrl(url: string): ValidationResult {\n  try {\n    const parsedUrl = new URL(url);\n    \n    // ドメイン検証\n    if (!parsedUrl.hostname.endsWith('gutenberg.org')) {\n      return { isValid: false, error: '許可されたドメインではありません' };\n    }\n    \n    // SSRF対策: プライベートIPチェック\n    // ...\n    \n    // 正規化\n    const normalizedUrl = parsedUrl.toString().replace('http://', 'https://');\n    return { isValid: true, normalizedUrl };\n  } catch (error) {\n    return { isValid: false, error: 'URLが無効です' };\n  }\n}\n```\n\nRestrictions:\n- すべてのセキュリティチェックを実装する\n- エラーメッセージはユーザーフレンドリーに\n- プライベートIPチェックを確実に実装\n\nSuccess:\n- 有効なGutenberg URLを正しく検証できる\n- 無効なURLやプライベートIPを拒否できる\n- エラーメッセージが明確\n\n実装完了後、tasks.mdでこのタスクを [-] から [x] に更新し、log-implementation ツールで実装詳細を記録してください。_
 
-- [ ] 2.3 ID生成ユーティリティ
+- [x] 2.3 ID生成ユーティリティ
   - ファイル: `lib/scraper/id-generator.ts`（新規作成）
   - generateParagraphId関数を実装
   - 目的: 章・段落のユニークID生成
