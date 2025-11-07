@@ -1,0 +1,14 @@
+{
+  "filePath": ".spec-workflow/specs/work-registration/tasks.md",
+  "currentVersion": 1,
+  "snapshots": [
+    {
+      "version": 1,
+      "filename": "snapshot-001.json",
+      "timestamp": "2025-11-07T02:23:56.189Z",
+      "trigger": "initial",
+      "approvalId": "approval_1762482236182_22yv3uutg",
+      "approvalTitle": "作品登録機能：タスク定義書の承認"
+    }
+  ]
+}

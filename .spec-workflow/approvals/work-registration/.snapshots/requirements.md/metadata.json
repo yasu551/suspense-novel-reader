@@ -1,0 +1,14 @@
+{
+  "filePath": ".spec-workflow/specs/work-registration/requirements.md",
+  "currentVersion": 1,
+  "snapshots": [
+    {
+      "version": 1,
+      "filename": "snapshot-001.json",
+      "timestamp": "2025-11-07T02:00:56.343Z",
+      "trigger": "initial",
+      "approvalId": "approval_1762480856337_1v7e2jhg0",
+      "approvalTitle": "作品登録機能：要件定義書の承認"
+    }
+  ]
+}

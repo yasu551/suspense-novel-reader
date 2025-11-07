@@ -1,0 +1,14 @@
+{
+  "filePath": ".spec-workflow/specs/work-registration/design.md",
+  "currentVersion": 1,
+  "snapshots": [
+    {
+      "version": 1,
+      "filename": "snapshot-001.json",
+      "timestamp": "2025-11-07T02:17:47.526Z",
+      "trigger": "initial",
+      "approvalId": "approval_1762481867519_tlsy68f67",
+      "approvalTitle": "作品登録機能：設計書の承認"
+    }
+  ]
+}
