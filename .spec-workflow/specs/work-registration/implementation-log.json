@@ -1,6 +1,57 @@
 {
   "entries": [
     {
+      "taskId": "2.2",
+      "timestamp": "2025-11-07T03:26:09.933Z",
+      "summary": "URL検証ユーティリティを実装（Project Gutenberg URL検証、SSRF対策、URL正規化）",
+      "filesModified": [],
+      "filesCreated": [
+        "lib/scraper/url-validator.ts"
+      ],
+      "statistics": {
+        "linesAdded": 180,
+        "linesRemoved": 0,
+        "filesChanged": 1
+      },
+      "artifacts": {
+        "functions": [
+          {
+            "name": "validateGutenbergUrl",
+            "purpose": "Project Gutenberg URLを検証し、セキュリティチェック（SSRF対策）とURL正規化を実行",
+            "location": "lib/scraper/url-validator.ts:71",
+            "signature": "(url: string) => ValidationResult",
+            "isExported": true
+          },
+          {
+            "name": "isValidGutenbergUrl",
+            "purpose": "URLが有効なProject Gutenberg URLかどうかを簡易チェック",
+            "location": "lib/scraper/url-validator.ts:151",
+            "signature": "(url: string) => boolean",
+            "isExported": true
+          },
+          {
+            "name": "extractWorkId",
+            "purpose": "Project Gutenberg URLから作品IDを抽出",
+            "location": "lib/scraper/url-validator.ts:166",
+            "signature": "(url: string) => string | null",
+            "isExported": true
+          },
+          {
+            "name": "isPrivateIP",
+            "purpose": "ホスト名がプライベートIPアドレスかどうかをチェック（SSRF対策）",
+            "location": "lib/scraper/url-validator.ts:38",
+            "signature": "(hostname: string) => boolean",
+            "isExported": false
+          }
+        ],
+        "classes": [],
+        "apiEndpoints": [],
+        "components": [],
+        "integrations": []
+      },
+      "id": "433c9399-e86a-4c95-87b2-a6526b7c25b3"
+    },
+    {
       "taskId": "2.1",
       "timestamp": "2025-11-07T03:09:14.704Z",
       "summary": "作品関連の型定義を作成（ScrapedWork、ParsedWork、API型、エラークラス等）",
@@ -238,5 +289,5 @@
       "id": "94beaf8e-2185-4e4b-94ae-6630a3384632"
     }
   ],
-  "lastUpdated": "2025-11-07T03:09:14.705Z"
+  "lastUpdated": "2025-11-07T03:26:09.935Z"
 }

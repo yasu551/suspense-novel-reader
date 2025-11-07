@@ -44,7 +44,7 @@
   - _Requirements: 要件1（作品登録）_
   - _Prompt: spec work-registrationのタスク実装を開始します。まず spec-workflow-guide を実行してワークフローガイドを取得してから実装を進めてください。\n\nRole: TypeScript開発者（型システムとインターフェース専門）\n\nTask: スクレイパー/パーサーで使用する作品関連の型定義を作成してください（要件1: 作品登録）。design.md の「コンポーネントとインターフェース」セクションを参照し、以下の型を定義してください：\n\n1. **ScrapedWork**: スクレイピング結果の型\n   - sourceUrl, sourceId, title, author, language, rawHtml, publicationYear?\n\n2. **ParsedWork**: パース結果の型\n   - chapters: ParsedChapter[], totalParagraphs: number\n\n3. **ParsedChapter**: 章の型\n   - chapterNumber, title, order, paragraphs: ParsedParagraph[]\n\n4. **ParsedParagraph**: 段落の型\n   - id, originalText, order\n\n5. **WorkMetadata**: メタデータの型\n   - title, author, language, publicationYear?\n\n6. **ValidationResult**: URL検証結果の型\n   - isValid, error?, normalizedUrl?\n\n7. **WorkRegistrationRequest**: API リクエストの型\n   - url, genre?, difficulty?\n\n8. **WorkRegistrationResponse**: API レスポンスの型\n   - id, title, author, status, translationJobId?\n\nRestrictions:\n- すべての型をexportする\n- オプショナルプロパティは `?` を使用\n- design.md の定義に厳密に従う\n\nSuccess:\n- すべての型が正しく定義されている\n- TypeScriptコンパイルエラーがない\n- 他のファイルから型をインポートして使用できる\n\n実装完了後、tasks.mdでこのタスクを [-] から [x] に更新し、log-implementation ツールで実装詳細を記録してください。_
 
-- [ ] 2.2 URL検証ユーティリティ
+- [x] 2.2 URL検証ユーティリティ
   - ファイル: `lib/scraper/url-validator.ts`（新規作成）
   - validateGutenbergUrl関数を実装（URL形式検証、SSRF対策）
   - 目的: URL検証とセキュリティ対策
