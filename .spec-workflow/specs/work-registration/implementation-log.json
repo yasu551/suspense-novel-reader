@@ -1,6 +1,81 @@
 {
   "entries": [
     {
+      "taskId": "1.3",
+      "timestamp": "2025-11-07T03:03:15.925Z",
+      "summary": "Prismaスキーマに TranslationJob、GlossaryTerm、UserProfile、ReadingProgress、ChatLog モデルを追加しました。design.mdの仕様に従い、各モデルにフィールド、リレーション、インデックス、カスケード削除を設定しました。Work と Paragraph モデルへのリレーション参照も復元しました。",
+      "filesModified": [
+        "prisma/schema.prisma"
+      ],
+      "filesCreated": [],
+      "statistics": {
+        "linesAdded": 89,
+        "linesRemoved": 2,
+        "filesChanged": 1
+      },
+      "artifacts": {
+        "classes": [
+          {
+            "name": "TranslationJob",
+            "purpose": "翻訳ジョブモデル - 作品の翻訳ジョブの状況、進捗、エラー情報を管理",
+            "location": "prisma/schema.prisma",
+            "methods": [
+              "フィールド: id, workId, status, translationType, totalCount, completedCount, errorLog",
+              "リレーション: work (多対1)",
+              "インデックス: [workId], [status]"
+            ],
+            "isExported": true
+          },
+          {
+            "name": "GlossaryTerm",
+            "purpose": "用語辞書モデル - 専門用語の訳語、定義、難易度を管理",
+            "location": "prisma/schema.prisma",
+            "methods": [
+              "フィールド: id, originalTerm, translation, difficulty, definition, synonyms, easyAlternative",
+              "ユニーク制約: originalTerm",
+              "インデックス: [originalTerm]"
+            ],
+            "isExported": true
+          },
+          {
+            "name": "UserProfile",
+            "purpose": "ユーザープロフィールモデル - ユーザー情報と設定を管理（将来的な認証機能用）",
+            "location": "prisma/schema.prisma",
+            "methods": [
+              "フィールド: id, email, displayName, fontSize, theme, defaultMode",
+              "リレーション: readingProgresses (1対多), chatLogs (1対多)",
+              "ユニーク制約: email"
+            ],
+            "isExported": true
+          },
+          {
+            "name": "ReadingProgress",
+            "purpose": "読書進捗モデル - ユーザーの読書位置を管理",
+            "location": "prisma/schema.prisma",
+            "methods": [
+              "フィールド: id, userId, workId, paragraphId",
+              "リレーション: user (多対1), work (多対1), paragraph (多対1)",
+              "ユニーク制約: [userId, workId]",
+              "インデックス: [userId], [workId]"
+            ],
+            "isExported": true
+          },
+          {
+            "name": "ChatLog",
+            "purpose": "チャットログモデル - AIチャットの質問と回答を管理",
+            "location": "prisma/schema.prisma",
+            "methods": [
+              "フィールド: id, userId, question, answer, referencedParagraphIds, mode",
+              "リレーション: user (多対1, optional)",
+              "インデックス: [userId], [createdAt]"
+            ],
+            "isExported": true
+          }
+        ]
+      },
+      "id": "14da4274-6349-4296-9e21-02fb9d67df44"
+    },
+    {
       "taskId": "1.2",
       "timestamp": "2025-11-07T02:59:04.120Z",
       "summary": "Prismaスキーマに Work、Chapter、Paragraph モデルを定義しました。design.mdの仕様に従い、各モデルにフィールド、リレーション、インデックス、カスケード削除を設定しました。dotenvパッケージをインストールし、prisma.config.tsに環境変数読み込みを追加しました。",
@@ -85,5 +160,5 @@
       "id": "94beaf8e-2185-4e4b-94ae-6630a3384632"
     }
   ],
-  "lastUpdated": "2025-11-07T02:59:04.120Z"
+  "lastUpdated": "2025-11-07T03:03:15.926Z"
 }

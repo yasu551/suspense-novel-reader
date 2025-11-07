@@ -18,7 +18,7 @@
   - _Requirements: 要件1（作品登録）_
   - _Prompt: spec work-registrationのタスク実装を開始します。まず spec-workflow-guide を実行してワークフローガイドを取得してから実装を進めてください。\n\nRole: データベースアーキテクト\n\nTask: Prismaスキーマに Work、Chapter、Paragraph モデルを定義してください（要件1: 作品登録）。design.md のデータモデルセクションを参照し、以下のモデルを実装してください：\n\n1. **Work モデル**:\n   - id, title, author, publicationYear, isPublicDomain\n   - language, genre, tags, wordCount, difficulty\n   - coverUrl, sourceUrl, sourceId, license\n   - popularityScore, translationStatus, translationProgress\n   - createdAt, updatedAt\n   - リレーション: chapters (1対多)\n\n2. **Chapter モデル**:\n   - id, workId, chapterNumber, title, order\n   - createdAt, updatedAt\n   - リレーション: work (多対1), paragraphs (1対多)\n   - ユニーク制約: [workId, chapterNumber]\n\n3. **Paragraph モデル**:\n   - id (カスタムID: \"work-{workId}/chapter-{index}/paragraph-{index}\")\n   - chapterId, originalText, translationNormal, translationEasy\n   - order, glossaryTags\n   - createdAt, updatedAt\n   - リレーション: chapter (多対1)\n\nRestrictions:\n- design.md のスキーマ定義に厳密に従う\n- インデックスを適切に設定（translationStatus, language, difficulty等）\n- カスケード削除（onDelete: Cascade）を設定\n- @db.Text デコレータを長文フィールドに使用\n\nSuccess:\n- すべてのモデルが正しく定義されている\n- リレーションとインデックスが適切に設定されている\n- `npx prisma format` でエラーが出ない\n\n実装完了後、tasks.mdでこのタスクを [-] から [x] に更新し、log-implementation ツールで実装詳細を記録してください。_
 
-- [ ] 1.3 Prismaスキーマの定義（TranslationJob、その他のモデル）
+- [x] 1.3 Prismaスキーマの定義（TranslationJob、その他のモデル）
   - ファイル: `prisma/schema.prisma`（修正）
   - TranslationJob、GlossaryTerm、UserProfile、ReadingProgress、ChatLogモデルをスキーマに定義
   - 目的: 翻訳ジョブとサポート機能のデータ構造を定義

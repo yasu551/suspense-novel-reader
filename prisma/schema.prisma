@@ -35,7 +35,9 @@ model Work {
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
 
-  chapters Chapter[]
+  chapters          Chapter[]
+  translationJobs   TranslationJob[]
+  readingProgresses ReadingProgress[]
 
   @@index([translationStatus])
   @@index([language])
@@ -71,7 +73,91 @@ model Paragraph {
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 
-  chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  chapter           Chapter           @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  readingProgresses ReadingProgress[]
 
   @@index([chapterId, order])
+}
+
+// 用語辞書
+model GlossaryTerm {
+  id              String   @id @default(cuid())
+  originalTerm    String   @unique
+  translation     String
+  difficulty      String? // "easy" | "normal" | "hard"
+  definition      String?  @db.Text
+  synonyms        String[]
+  easyAlternative String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([originalTerm])
+}
+
+// ユーザープロフィール（将来的に認証機能追加時に使用）
+model UserProfile {
+  id          String   @id @default(cuid())
+  email       String?  @unique
+  displayName String?
+  fontSize    String?
+  theme       String?
+  defaultMode String? // "original" | "japanese" | "parallel"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  readingProgresses ReadingProgress[]
+  chatLogs          ChatLog[]
+}
+
+// 読書進捗
+model ReadingProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  workId      String
+  paragraphId String
+  updatedAt   DateTime @updatedAt
+
+  user      UserProfile @relation(fields: [userId], references: [id], onDelete: Cascade)
+  work      Work        @relation(fields: [workId], references: [id], onDelete: Cascade)
+  paragraph Paragraph   @relation(fields: [paragraphId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, workId])
+  @@index([userId])
+  @@index([workId])
+}
+
+// チャットログ
+model ChatLog {
+  id                     String   @id @default(cuid())
+  userId                 String?
+  question               String   @db.Text
+  answer                 String   @db.Text
+  referencedParagraphIds String[]
+  mode                   String? // "original" | "japanese" | "parallel"
+  createdAt              DateTime @default(now())
+
+  user UserProfile? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+// 翻訳ジョブ
+model TranslationJob {
+  id              String    @id @default(cuid())
+  workId          String
+  status          String    @default("pending") // "pending" | "in_progress" | "completed" | "failed"
+  translationType String // "normal" | "easy" | "both"
+  totalCount      Int // 全段落数
+  completedCount  Int       @default(0) // 処理済み段落数
+  errorLog        String?   @db.Text
+  startedAt       DateTime?
+  completedAt     DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  work Work @relation(fields: [workId], references: [id], onDelete: Cascade)
+
+  @@index([workId])
+  @@index([status])
 }
